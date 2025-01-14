@@ -1,15 +1,17 @@
-# /users/register Endpoint Documentation
+# Backend API Documentation
 
-## Description
+## /users/register Endpoint Documentation
+
+### Description
 The `/users/register` endpoint is used to register a new user in the system. It validates the user's input, hashes the password, creates a new user in the database, and returns a JSON Web Token (JWT) for authentication.
 
-## Method
+### Method
 `POST`
 
-## URL
+### URL
 `/users/register`
 
-## Request Body
+### Request Body
 The following data needs to be provided in the request body as JSON:
 - `fullName` (object)
   - `firstName` (string, required, minimum 3 characters)
@@ -17,7 +19,7 @@ The following data needs to be provided in the request body as JSON:
 - `email` (string, required, must be a valid email)
 - `password` (string, required, minimum 6 characters)
 
-# Example:
+### Example:
 ```json
 {
   "fullName": {
@@ -29,7 +31,7 @@ The following data needs to be provided in the request body as JSON:
 }
 ```
 
-# Response:
+### Response:
 ```json
 {
   "user": {
@@ -42,7 +44,8 @@ The following data needs to be provided in the request body as JSON:
   "token": "your-jwt-token"
 }
 ```
-# Example of an error response:
+
+### Example of an error response:
 ```json
 {
   "errors": [
@@ -54,6 +57,62 @@ The following data needs to be provided in the request body as JSON:
     {
       "msg": "First name must be at least 3 characters long",
       "param": "fullName.firstName",
+      "location": "body"
+    },
+    {
+      "msg": "Password must be at least 6 characters long",
+      "param": "password",
+      "location": "body"
+    }
+  ]
+}
+```
+
+## /users/login Endpoint Documentation
+
+### Description
+The `/users/login` endpoint is used to authenticate an existing user. It validates the user's input, checks the credentials, and returns a JSON Web Token (JWT) for authentication if the credentials are valid.
+
+### Method
+`POST`
+
+### URL
+`/users/login`
+
+### Request Body
+The following data needs to be provided in the request body as JSON:
+- `email` (string, required, must be a valid email)
+- `password` (string, required, minimum 6 characters)
+
+### Example:
+```json
+{
+  "email": "john.doe@example.com",
+  "password": "password123"
+}
+```
+
+### Response:
+```json
+{
+  "user": {
+    "fullName": {
+      "firstName": "John",
+      "lastName": "Doe"
+    },
+    "email": "john.doe@example.com"
+  },
+  "token": "your-jwt-token"
+}
+```
+
+### Example of an error response:
+```json
+{
+  "errors": [
+    {
+      "msg": "Invalid Email",
+      "param": "email",
       "location": "body"
     },
     {
