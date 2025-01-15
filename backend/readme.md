@@ -123,3 +123,66 @@ The following data needs to be provided in the request body as JSON:
   ]
 }
 ```
+
+
+## /users/profile Endpoint Documentation
+
+### Description
+The `/users/profile` endpoint is used to retrieve the profile of the logged-in user.
+
+### Method
+`GET`
+
+### URL
+`/users/profile`
+
+### Headers
+`Authorization` (string, required): Bearer token of the logged-in user.
+
+### Response:
+```json
+{
+  "user": {
+    "fullName": {
+      "firstName": "John",
+      "lastName": "Doe"
+    },
+    "email": "john.doe@example.com"
+  }
+}
+```
+
+### Example of an error response:
+```json 
+{
+  "message": "Unauthorized"
+}
+```
+
+## /users/logout Endpoint Documentation
+
+### Description
+The `/users/logout` endpoint is used to log out the logged-in user.
+
+### Method
+`GET`
+
+### URL
+`/users/logout`
+
+### Headers
+`Authorization` (string, required): Bearer token of the logged-in user.
+
+### Response:
+```json
+{
+  "message": "Logged out successfully"
+}
+```
+
+### Example of an error response:
+```json 
+{
+  "message": "Unauthorized"
+}
+```
